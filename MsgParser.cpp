@@ -133,15 +133,14 @@ void MsgParser::analyze(const BYTE datas[], const int size, VArray* dst) {
                 dst->header = datas + tempNeedSize;
             }
         }
-    }
-    else{
-        memcpy(buffer + bufferedSize,datas,size);
-        needToReadSize = needToReadSize - size;
-        bufferedSize += size;
-        
-        cout << "still waiting content,need size :"<< needToReadSize << endl;
-    }
-    
+        else{
+            memcpy(buffer + bufferedSize,datas,size);
+            needToReadSize = needToReadSize - size;
+            bufferedSize += size;
+            
+            cout << "still waiting content,need size :"<< needToReadSize << endl;
+        }
+}
 }
 
 void MsgParser::clearBufferAndReset(){
@@ -149,7 +148,6 @@ void MsgParser::clearBufferAndReset(){
     bufferedSize = 0;
     needToReadSize = 0;
     currentState = STATE_READING_HEADER;
-
 }
 
 
