@@ -15,7 +15,7 @@ MsgParser::MsgParser(int bufferSie /* = BUFFER_SIZE */) {
     limitBufferedSize = bufferSie;
     buffer = (BYTE*) malloc(limitBufferedSize);
     memset(buffer, 0, limitBufferedSize);
-    vArray =  (VArray*)malloc(sizeof(vArray));
+    vArray =  (VArray*)malloc(sizeof(VArray));
     needToReadSize = 0;
     bufferedSize = 0;
     fixedHeaderSize = 2 + 1 + 2 + 2; // header | version | command | length
@@ -23,7 +23,7 @@ MsgParser::MsgParser(int bufferSie /* = BUFFER_SIZE */) {
 }
 
 void MsgParser::parse(const BYTE datas[], const int size) {
-    bzero(vArray,sizeof(vArray));
+    bzero(vArray,sizeof(VArray));
     analyze(datas,size,vArray);
     if(vArray->size != 0){
         parse(vArray->header,vArray->size);
@@ -174,8 +174,6 @@ bool MsgParser::validate(const BYTE* data,int size){
         return false;
     return true;
 }
-
-
 
 MsgParser::~MsgParser() {
     if(buffer){
